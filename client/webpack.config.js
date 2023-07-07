@@ -16,21 +16,24 @@ module.exports = () => {
     },
     plugins: [
       new HtmlWebpackPlugin({
-        template: "./src/index.html",
+        template: "./index.html",
         title: "J.A.T.E",
       }),
 
       new InjectManifest({
-        swSrc: "./src/sw.js",
-        swDest: "service-worker.js",
+        swSrc: "./src-sw.js",
+        swDest: "src-sw.js",
       }),
 
       new WebpackPwaManifest({
+        fingerprints: false,
+        inject: true,
         name: "Just Another Text Editor",
         short_name: "J.A.T.E",
         description: "Edit text online and offline",
         background_color: "#225ca3",
-        start_url: ".",
+        start_url: "./",
+        publicPath: "./",
         icons: [
           {
             src: path.resolve("src/images/logo.png"),
@@ -40,7 +43,6 @@ module.exports = () => {
         ],
         display: "standalone",
         theme_color: "#225ca3",
-        fingerprints: false,
       }),
     ],
 
